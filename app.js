@@ -27,12 +27,13 @@ function displayResults(responseJson) {
 };
 
 
-function getNatlParks(query, searchTerm, limit=10) {
+function getNatlParks(query, searchTerm) {
+  const inputLimit = $('#js-max-results').val();
   const params = {
     api_key: apiKey,
     q: query,
     stateCode: searchTerm,
-    limit
+    limit: inputLimit
   };
   const queryString = formatQueryParams(params)
   const url = searchURL + '?' + queryString;
@@ -54,8 +55,8 @@ function watchForm() {
   $('form').submit(event => {
     event.preventDefault();
     const searchTerm = $('#js-search-state').val();
-    const limit = $('#js-max-results').val();
-    getNatlParks(searchTerm, limit);
+    const inputLimit = 10;
+    getNatlParks(searchTerm, inputLimit);
   });
 }
 
